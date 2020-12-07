@@ -36,6 +36,37 @@ struct workload
 	int * work;
 };
 
+/* Additional Custom Data Structures */
+typedef struct dl
+{  
+  struct dl *prev, *next;
+  int page; 
+}dl;
+
+typedef struct dll
+{         
+  int count;                 
+  int cache_size;        
+  struct dl *front;
+  struct dl *rear;
+}dll;
+
+typedef struct link
+{ 
+  struct link *next;
+  int page; 
+  int bitref;
+}link;
+
+typedef struct ll
+{
+  int count;
+  int cache_size;
+  struct link *front;
+  struct link *rear;
+}ll;
+
+
 //----------------------------------------------------------------
 //----------------------------------------------------------------
 /* ALL FUNCTION DEFINITIONS HERE */
@@ -49,5 +80,15 @@ float policy_FIFO(struct workload * w, int cache_size);
 float policy_LRU(struct workload * w, int cache_size);
 float policy_RANDOM(struct workload * w, int cache_size);
 float policy_LRUapprox(struct workload * w, int cache_size);
+
+/* Additional Custom Functions */
+dll* init_dll(int cache_size);
+dl* init_dl(int page);
+int check_dll(int page,dll* dll);
+dll* insert_dl(int page,dll* dll);
+ll* init_ll(int cache_size);
+link* init_l(int page);
+ll * insert_l(int page, ll* ll);
+int check_ll(int page,ll* ll);
 
 #endif /* __DEF_H__ */
