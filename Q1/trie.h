@@ -17,6 +17,7 @@ typedef _trie_node_t* trie_node_t;
 typedef struct {
     trie_node_t head; // The head/start node of trie
     // Add whatever variables you require for locking here
+    pthread_mutex_t lock;
 } _trie_t;
 
 typedef _trie_t* trie_t;
@@ -61,6 +62,7 @@ void delete_kv(trie_t trie, char* key);
     If no key matches the prefix, the array will just have a single NULL.
 */
 char** keys_with_prefix(trie_t trie, char* prefix);
+
 
 /*
     delete_trie(trie_t trie) clears the entire trie from memory. 
